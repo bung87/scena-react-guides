@@ -1,5 +1,3 @@
-
-
 <p align="middle" ><img src="https://raw.githubusercontent.com/daybrush/guides/master/demo/images/guides.png"/></p>
 <h2 align="middle">React Guides</h2>
 <p align="middle">
@@ -17,92 +15,102 @@
     src="https://img.shields.io/static/v1.svg?label=&message=Svelte&style=flat-square&color=C82B38"></a>
 </p>
 <p align="middle">A React Guides component that can draw ruler and manage guidelines.</p>
+<p align="middle">This one is taken from daybrush/scene react guides, some features we added, which seems to be usefull for public has been added in the forked version of the library in my repo itself[PR has been made to merge those]. This specific repo adds some other extra func to the library which we believe won't be that much useful for the general public. The defaultGuides and show and hide guides is i the PR made to original package.This one contains one more function to dynamically change the guides </p>
+
 <p align="middle">
     <a href="https://daybrush.com/guides" target="_blank"><strong>Demo</strong></a> /
     <a href="https://daybrush.com/guides/release/latest/doc/" target="_blank"><strong>API</strong></a> /
     <a href="https://github.com/daybrush/scenejs-editor" target="_blank"><strong>Main Project</strong></a>
 </p>
 
-
 ## ⚙️ Installation
+
 ### npm
+
 ```sh
-$ npm i @scena/react-guides
+$ npm i https://github.com/sajanthomas01/scena-react-guides
+```
+
+### yarn
+
+```sh
+$ yarn add https://github.com/sajanthomas01/scena-react-guides
 ```
 
 ## 🚀 How to use
-```tsx
 
+```tsx
 import * as React from "react";
 import Guides from "@scena/react-guides";
 
 export default class App extends React.Component {
-    render() {
-        return (<Guides
-            ref={e => {
-                this.guides = e;
-            }}
-            type="horizontal"
-            onChangeGuides={({ guides }) => {
-                console.log(guides);
-            }}
-        />);
-    }
-    componentDidMount() {
-        this.guides.resize();
-        let scrollX = 0;
-        let scrollY = 0;
+  render() {
+    return (
+      <Guides
+        ref={(e) => {
+          this.guides = e;
+        }}
+        type="horizontal"
+        onChangeGuides={({ guides }) => {
+          console.log(guides);
+        }}
+      />
+    );
+  }
+  componentDidMount() {
+    this.guides.resize();
+    let scrollX = 0;
+    let scrollY = 0;
 
-        window.addEventListener("wheel", e => {
-            scrollX += e.deltaX;
-            scrollY += e.deltaY;
+    window.addEventListener("wheel", (e) => {
+      scrollX += e.deltaX;
+      scrollY += e.deltaY;
 
-            this.guides.scrollGuides(scrollY);
-            this.guides.scroll(scrollX);
-        });
-        window.addEventListener("resize", () => {
-            this.guides.resize();
-        });
-    }
+      this.guides.scrollGuides(scrollY);
+      this.guides.scroll(scrollX);
+    });
+    window.addEventListener("resize", () => {
+      this.guides.resize();
+    });
+  }
 }
 
 export interface RulerProps {
-    type?: "horizontal" | "vertical";
-    width?: number;
-    height?: number;
-    unit?: number;
-    zoom?: number;
-    direction?: "start" | "end";
-    style?: IObject<any>;
-    backgroundColor?: string;
-    lineColor?: string;
-    textColor?: string;
+  type?: "horizontal" | "vertical";
+  width?: number;
+  height?: number;
+  unit?: number;
+  zoom?: number;
+  direction?: "start" | "end";
+  style?: IObject<any>;
+  backgroundColor?: string;
+  lineColor?: string;
+  textColor?: string;
 }
 
 export interface GuidesOptions extends RulerProps {
-    className?: string;
-    setGuides?: (guides: number[]) => any;
-    rulerStyle?: IObject<any>;
-    snapThreshold?: number;
-    snaps?: number[];
-    displayDragPos?: boolean;
-    dragPosFormat?: (value: number) => string | number;
+  className?: string;
+  setGuides?: (guides: number[]) => any;
+  rulerStyle?: IObject<any>;
+  snapThreshold?: number;
+  snaps?: number[];
+  displayDragPos?: boolean;
+  dragPosFormat?: (value: number) => string | number;
+  defaultGuides: [];
+  showGuides: boolean;
 }
 
 export interface GuidesInterface {
-    getGuides(): number[];
-    scroll(pos: number): void;
-    scrollGuides(pos: number): void;
-    loadGuides(guides: number[]): void;
-    resize(): void;
+  getGuides(): number[];
+  scroll(pos: number): void;
+  scrollGuides(pos: number): void;
+  loadGuides(guides: number[]): void;
+  resize(): void;
 }
-
-
 ```
 
-
-
 ## ⚙️ Developments
+
 ### `npm run start`
 
 Runs the app in the development mode.<br>
@@ -111,9 +119,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-
-
 ## ⭐️ Show Your Support
+
 Please give a ⭐️ if this project helped you!
 
 ## 👏 Contributing
@@ -123,7 +130,6 @@ If you have any questions or requests or want to contribute to `@scena/react-gui
 ## 🐞 Bug Report
 
 If you find a bug, please report to us opening a new [Issue](https://github.com/daybrush/guides/issues) on GitHub.
-
 
 ## 📝 License
 
