@@ -10,7 +10,9 @@ export default class App extends Component<{}> {
     public state = {
         zoom: 1,
         unit: 50,
-        showGuide: false
+        showGuide: false,
+        defGuidesH : [100,200,300,400],
+        defGuidesV : [50,100,150,200,250]
     };
     private scene: Scene = new Scene();
     // private editor!: Editor;
@@ -44,7 +46,7 @@ export default class App extends Component<{}> {
                     onDragEnd={e => {
                         console.log(e);
                     }}
-                    guidePreset={[100,200,300]}
+                    defaultGuides={this.state.defGuidesH}
                     showGuides={this.state.showGuide}
                 />
             </div>
@@ -58,10 +60,15 @@ export default class App extends Component<{}> {
                     onChangeGuides={({ guides }) => {
                         console.log("vertical", guides);
                     }}
+                    defaultGuides={this.state.defGuidesV}
+                    showGuides={this.state.showGuide}
                 />
             </div>
             <div className="container">
-            <button onClick={this.showUnshow}>tap me</button>
+            <button onClick={this.showUnshow}>Hide/Show</button>
+            <button onClick={this.setGuide}>Set new grid horizontally </button>
+            <button onClick={this.setGuideV}>set new grid vertically</button>
+
                 <img src="https://daybrush.com/guides/images/guides.png" width="200" alt="guides" />
                 <p className="dragit">Drag Screen & Rulers!</p>
                 <p><button onClick={() => {
@@ -137,5 +144,15 @@ export default class App extends Component<{}> {
     public showUnshow = () =>{
       const self = this ;
       this.setState({showGuide: !self.state.showGuide})
+    }
+
+    public setGuide = () =>{
+      const self = this ;
+      this.setState({defGuidesH: [10,20,30,40,50]})
+    }
+
+    public setGuideV = () =>{
+      const self = this ;
+      this.setState({defGuidesV: [300,400,500]})
     }
 }
