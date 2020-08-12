@@ -25,7 +25,7 @@ export default class Guides extends React.PureComponent<GuidesProps, GuidesState
         onDragEnd: () => {},
         displayDragPos: false,
         dragPosFormat: v => v,
-        guidePreset: [],
+        defaultGuides: [],
         showGuides: true,
     };
     public state: GuidesState = {
@@ -126,11 +126,21 @@ export default class Guides extends React.PureComponent<GuidesProps, GuidesState
             dragend: this.onDragEnd,
         },
         );
-        this.setState({guides: this.props.guidePreset || []}); // pass array of guides on mount data to create gridlines or something like that in ui 
+        this.setState({guides: this.props.defaultGuides || []}); // pass array of guides on mount data to create gridlines or something like that in ui 
     }
     public componentWillUnmount() {
         this.dragger.unset();
     }
+
+    public componentDidUpdate(prevProps: any) {
+      if (prevProps.defaultGuides !== this.props.defaultGuides) {
+        //to dynamically update guides from code rather than dragging guidelines
+        this.setState({guides: this.props.defaultGuides || []},()=>{
+          this.renderGuides();
+        });
+      }
+    }
+
     /**
      * Load the current guidelines.
      * @memberof Guides
